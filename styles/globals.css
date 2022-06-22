@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  letter-spacing: 0;
+  line-height: 1.5;
+  font-size: 1rem;
+  font-weight: 400;
+  color:'#46505D';
+  background-color: '#fff';
+  /*position: relative;*/
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+*,*::after,*::before {
+  box-sizing: border-box;
+  margin:0;
+  padding:0;
+}
+.activeSidebar{
+  @apply hover:border-l-4 hover:border-green-200 ;
+}
+
+.headerText{
+  @apply mb-2 font-sans text-base font-bold text-gray-600 hover:text-gray-700;
+}
+
+@layer components{
+  .leftIConCard{
+    @apply hover:shadow-md shadow-sm bg-[#ffff] border-transparent rounded-sm cursor-pointer;
+  }
+}
