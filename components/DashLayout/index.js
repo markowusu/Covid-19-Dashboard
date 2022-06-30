@@ -18,7 +18,7 @@ function DashLayout({children,title="Dashboard",footer=false,header=true}){
         {/* <div className="fixed inset-0 flex items-center justify-center opacity-100 bg-[#00000080] backdrop-opacity-100 z-[-1] " ></div> */}
 
                 <Sidebar/>
-                <main className={"flex flex-col mx-auto"}>
+                <main className={"flex flex-col mx-auto "}>
                 {header && <DashHeader/>}
 
                  <div className="mt-4 ">
