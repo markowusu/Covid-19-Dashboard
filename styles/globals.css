@@ -27,8 +27,13 @@ a {
   margin:0;
   padding:0;
 }
-.activeSidebar{
-  @apply hover:border-l-4 hover:border-green-200 ;
+
+#activeSidebar{
+  @apply w-10 h-10 hover:bg-[#fdfdff] border-2 shadow-lg rounded-full mx-auto flex items-center justify-center border-[#355070];
+}
+
+.SidebarHover{
+  @apply hover:w-10 hover:h-10 hover:bg-[#fdfdff] hover:border-2 hover:shadow-lg hover:rounded-full mx-auto flex items-center justify-center   hover:border-[#355070];
 }
 
 .headerText{

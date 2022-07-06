@@ -7,23 +7,28 @@ import BubbleChartRoundedIcon from '@mui/icons-material/BubbleChartRounded';
 const  iconsList = [
      {
         iconName:"Home",
-        icon: <HomeRoundedIcon/>
+        icon: <HomeRoundedIcon className="text-[#034363]"/>,
+        link:"/dashboard"
     },
 {
         iconName:"Alert",
-        icon:<StarBorderRoundedIcon/>
+        icon:<StarBorderRoundedIcon className="text-[#034363]"/>,
+        link:"/alerts"
     },
    {
      iconName:"Message",
-     icon:<MailRoundedIcon/>
+     icon:<MailRoundedIcon className="text-[#034363]"/>,
+     link:"/messages"
  },
 {
      iconName:"Sentiment",
-     icon:<InsertChartRoundedIcon/>
+     icon:<InsertChartRoundedIcon className="text-[#034363]"/>,
+     link:"sentiment",
  },
 {
      iconName:"Analytics",
-     icon:<BubbleChartRoundedIcon/>
+     icon:<BubbleChartRoundedIcon className="text-[#034363]"/>,
+     link:"/analytics"
  }
 ]
    
