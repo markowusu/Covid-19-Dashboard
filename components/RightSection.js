@@ -11,7 +11,8 @@ import Card from "../components/Card";
 
 
 
-export const   RightSection =()=>{
+export const   RightSection =(props)=>{
+        console.log(props.cases)
         return (
             <div className='relative flex-none flex-grow w-3/5 '>
     
@@ -76,7 +77,7 @@ export const   RightSection =()=>{
             <div className='mt-4 align-middle headerText'> PATIENT STATISTICS  </div>
                 <span className='leftIConCard'><MoreHorizRounded/></span>
             </HeaderSection>
-            <Card/>
+            <Card cases = {props.cases} />
                
             </div>
         );

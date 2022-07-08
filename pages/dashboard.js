@@ -1,3 +1,4 @@
+
 import React from 'react';
 import DashLayout from '../components/DashLayout';
 import CardList from '../components/CardList';
@@ -18,12 +19,15 @@ import { RightSection } from '../components/RightSection';
 import HeaderSection from '../components/HeaderSection';
 
 
-const Dashboard = ()=>{
+const Dashboard = (props)=>{
+    console.log(props.cases);
 return (
+    
 <DashLayout>
-
+    
     <div className='flex flex-row flex-auto gap-6 '>
-    <RightSection/>
+   
+    <RightSection cases={props.cases}/>
     <div className='relative flex-auto'>
         <HeaderSection>
            <p className='headerText'>REPORTS</p>
@@ -101,14 +105,36 @@ return (
 
        
 
-        
+         
         
     </div>
-
+   
     </div>
+    
 </DashLayout>
+
 );
 
+
+
+}
+
+export const getStaticProps = async ()=>{
+    var a ={"day":4}
+    const res = await fetch('http://127.0.0.1:8000/confirmed/daily',{
+    method : "POST",
+    headers:{
+        'Content-Type':'application/json; charset=utf-8',
+    },
+    body:JSON.stringify(a)
+    })
+    const cases = await res.json()
+  
+    return {
+        props: {
+            cases
+        }
+    }
 }
 
 export default Dashboard;

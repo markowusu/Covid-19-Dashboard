@@ -20,10 +20,49 @@ import { managerData, nationalAverageData, yearLabels, managerQuarterData, natio
        this.handleClick.bind(this)
    }
 
-     handleClick =(e)=>{
+   componentDidMount(){
+    
+        var a ={"day":4}
+        const res =  fetch('http://127.0.0.1:8000/confirmed/daily',{
+        method : "POST",
+        async: true,
+        headers:{
+            'Content-Type':'application/json',
+        },
+        body: JSON.stringify(a)
+        })
+        
+        console.log(res)
+   }
+     handleClick =   (e)=>{
          
         const {innerText } = e.target;
         const isAnuual = innerText == "YEAR"
+        console.log(this.props,"I am from the card")
+       
+        // var a ={"day":4}
+        // const res =  fetch('http://127.0.0.1:8000/confirmed/daily',{
+        // method : "POST",
+        // async: true,
+        // headers:{
+        //     'Content-Type':'application/json',
+        // },
+        // body: JSON.stringify(a)
+        // })
+        
+        // console.log(res)
+      
+        // fetch("http://127.0.0.1:8000/confirmed/daily",
+        // {
+        //     method: "POST",
+        //     headers: { "Content-Type": "application/json" },
+        //     body:JSON.stringify({"days":4})
+        //   }
+        // ).then((response)=>{
+        //     const days = response.json()
+        //     console.log(response.json())
+        // });
+        
         if (isAnuual){
             const newData = isAnuual?managerData : managerQuarterData;
             this.setState({
@@ -63,7 +102,25 @@ import { managerData, nationalAverageData, yearLabels, managerQuarterData, natio
     }
     
     render(){
+    //     const data_arr = [];
+    //     const date_arr = [];
+        // const cases= this.props
+        // const confirmed_cases = cases.cases
+        // console.log(confirmed_cases)
+        //  const result = confirmed_cases.map((val)=>{
+        //     const data1 = val.cases
+        //     const date1 = val.dates
+        //  });
+          
+    // //   }
+    //         console.log(result)
+        
+       
+          
     return (
+           
+        
+      
         <div className="border-2 border-white rounded-md shadow-sm ">
         <div className='flex flex-row justify-between align-center '>
             <span className='pl-4 font-sans text-base text-gray-500'>
@@ -76,9 +133,15 @@ import { managerData, nationalAverageData, yearLabels, managerQuarterData, natio
               <LabelCard text="WEEK" onClick={this.handleClick} activate={this.state.activateWeek}/>
             </div>
         </div>
-        <LineChart data={this.state.data} labels={this.state.labels} average={this.state.average} />
+        
+           
+           <LineChart data={this.state.data} labels={this.state.labels} average={this.state.average} />
+     
+       
         </div>
     );
     }
 }
+
+
 export default Card;
