@@ -18,15 +18,19 @@ export const   RightSection =()=>{
         const [deaths , setDeaths] = useState();
         const [recovered, setRecovered] = useState();
         const [active, setActive] = useState();
+
+        const formatNumber = (num)  => {
+            return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+        }
         
         useEffect(()=>{
         axios.get(`https://disease.sh/v3/covid-19/all`).then((res)=>{
         //  console.log(res.data)
          const {cases,deaths, active, recovered} = res.data
-         setCases(cases)
-         setDeaths(deaths)
-         setRecovered(recovered)
-         setActive(active)  
+         setCases(formatNumber(cases))
+         setDeaths(formatNumber(deaths))
+         setRecovered(formatNumber(recovered))
+         setActive(formatNumber(active)) 
         });
         },[])
         return (
