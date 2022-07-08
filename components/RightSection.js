@@ -1,17 +1,34 @@
-import { VerifiedRounded , HomeMaxRounded} from '@mui/icons-material';
+import { VerifiedRounded , HomeMaxRounded, UpdateDisabledOutlined} from '@mui/icons-material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeartCircleCheck, faHouse, faShieldHalved, faShieldHeart, faUser } from '@fortawesome/free-solid-svg-icons';
 import { MoreHorizRounded } from '@mui/icons-material';
+import { useState , useEffect} from 'react';
 import { ChevronRightRounded, DangerousRounded, Person } from '@mui/icons-material';
 import classNames from 'classnames';
 import { MonitorHeartRounded } from '@mui/icons-material';
 import { faShield } from '@fortawesome/free-solid-svg-icons';
 import HeaderSection from '../components/HeaderSection';
 import Card from "../components/Card";
+import axios from "axios" ;
 
 
 
 export const   RightSection =()=>{
+        const [cases, setCases] = useState();
+        const [deaths , setDeaths] = useState();
+        const [recovered, setRecovered] = useState();
+        const [active, setActive] = useState();
+        
+        useEffect(()=>{
+        axios.get(`https://disease.sh/v3/covid-19/all`).then((res)=>{
+        //  console.log(res.data)
+         const {cases,deaths, active, recovered} = res.data
+         setCases(cases)
+         setDeaths(deaths)
+         setRecovered(recovered)
+         setActive(active)  
+        });
+        },[])
         return (
             <div className='relative flex-none flex-grow w-3/5 '>
     
@@ -28,8 +45,8 @@ export const   RightSection =()=>{
                    
                </div>
                <div className='space-y-0.5'>
-               <p className='font-medium text-slate-400 text-md'> Total Patients</p>
-                   <p className='font-semibold text-slate-800'> 2004</p>
+               <p className='font-medium text-slate-400 text-md'> Confirmed</p>
+                   <p className='font-semibold text-slate-800'>{cases}</p>
                </div>
                    
                </div> 
@@ -40,8 +57,8 @@ export const   RightSection =()=>{
                    
                </div>
                <div className='space-y-0.5'>
-               <p className='font-medium text-slate-400 text-md'> Total Staff</p>
-                   <p className='font-semibold text-slate-800'> 2004</p>
+               <p className='font-medium text-slate-400 text-md'> Active</p>
+                   <p className='font-semibold text-slate-800'> {active}</p>
                </div>
                    
                </div>
@@ -52,8 +69,8 @@ export const   RightSection =()=>{
                    
                </div>
                <div className='space-y-0.5'>
-               <p className='font-medium text-slate-400 text-md'> Total Rooms</p>
-                   <p className='font-semibold text-slate-800'> 2004</p>
+               <p className='font-medium text-slate-400 text-md'> Recovered </p>
+                   <p className='font-semibold text-slate-800'> {recovered}</p>
                </div>
                    
                </div>
@@ -64,8 +81,8 @@ export const   RightSection =()=>{
                    
                </div>
                <div className='space-y-0.5'>
-               <p className='font-medium text-slate-400 text-md'> Total Cars</p>
-                   <p className='font-semibold text-slate-800'> 2004</p>
+               <p className='font-medium text-slate-400 text-md'>Deaths</p>
+                   <p className='font-semibold text-slate-800'> {deaths}</p>
                </div>
                    
                </div>
