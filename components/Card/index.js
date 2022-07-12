@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import  LineChart from '../LineChart';
 import LabelCard from '../LabelCard';
 import dateRange from '../../utils/dateTime';
+import Papa from 'papaparse';
+import {useState} from 'react';
+
 import { managerData, nationalAverageData, yearLabels, managerQuarterData, nationalAverageQuarterData, quarterLabels } from '../../constants/mockData'
 
  class  Card  extends Component {
@@ -22,9 +25,9 @@ import { managerData, nationalAverageData, yearLabels, managerQuarterData, natio
 
 
      handleClick =async (e)=>{
-         
-        const actualData = []
-        const actualLabel = []
+       
+         let actualData;
+         let actualLabel;
         const {innerText } = e.target;
         const isAnuual = innerText == "YEAR"
         console.log(this.props,"I am from the card")
@@ -57,19 +60,28 @@ import { managerData, nationalAverageData, yearLabels, managerQuarterData, natio
             const res = await fetch("http://localhost:8000/confirmed/daily",{
                 method: "POST",
                 headers: {"content-type": "application/json; chartset=utf-8"},
-               body:JSON.stringify({"day":4} ),
+               body:JSON.stringify({"day":365} ),
             })
 
+         
+            
+           
             const responseData = await res.json()
-            console.log(responseData)
+            console.log(responseData.forecast)
+
+             actualLabel = Object.keys(responseData.forecast)
+             actualData = Object.values(responseData.forecast)
             
-            responseData.map((value)=>{
-                actualData.push(value.cases)
-                console.log(actualData, "actual values")
-                actualLabel.push(value.dates)
-                console.log(actualLabel,"here")
-            })
-            
+            // responseData.map((value)=>{
+            //     actualData.push(value.cases)
+            //     console.log(actualData, "actual values")
+            //     actualLabel.push(value.dates)
+            //     console.log(actualLabel,"here")
+            // })
+
+           
+
+          
             
             this.setState({
             activateYear: true,
@@ -109,6 +121,7 @@ import { managerData, nationalAverageData, yearLabels, managerQuarterData, natio
     }
     
     render(){
+      
     //     const data_arr = [];
     //     const date_arr = [];
         // const cases= this.props

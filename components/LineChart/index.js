@@ -18,8 +18,7 @@ class LineChart extends Component {
     bindChart=()=>{
         const myLineRef = this.myChartRef.current.getContext("2d");
         const {labels, data,average } = this.props;
-        const data_arr = [];
-        const label_arr = [];
+      
  
 
         if(myLineChart !== "undefined") myLineChart?.destroy();
@@ -55,11 +54,11 @@ Chart.defaults.global?.defaultFontColor = '#000';
             type: "line",
             data: {
                 //Bring in data
-                labels: label_arr.push(labels),
+                labels: labels,
                 datasets: [
                     {
                         label: "Sales",
-                        data: data_arr.push(data),
+                        data:data,
                         tension: 0.4,
                         borderColor: '#48cae4',
                         backgroundColor: transparentize("#caf0f8") ,

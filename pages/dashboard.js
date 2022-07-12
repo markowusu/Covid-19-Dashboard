@@ -28,7 +28,7 @@ return (
     
     <div className='flex flex-row flex-auto gap-6 '>
    
-    <RightSection cases={props.cases}/>
+    <RightSection/>
     <div className='relative flex-auto'>
         <HeaderSection>
            <p className='headerText'>REPORTS</p>
@@ -120,22 +120,22 @@ return (
 
 }
 
-export const getStaticProps = async ()=>{
-    var a ={"day":4}
-    const res = await fetch('http://127.0.0.1:8000/confirmed/daily',{
-    method : "POST",
-    headers:{
-        'Content-Type':'application/json; charset=utf-8',
-    },
-    body:JSON.stringify(a)
-    })
-    const cases = await res.json()
+// export const getStaticProps = async ()=>{
+//     var a ={"day":4}
+//     const res = await fetch('http://127.0.0.1:8000/confirmed/daily',{
+//     method : "POST",
+//     headers:{
+//         'Content-Type':'application/json; charset=utf-8',
+//     },
+//     body:JSON.stringify(a)
+//     })
+//     const cases = await res.json()
   
-    return {
-        props: {
-            cases
-        }
-    }
-}
+//     return {
+//         props: {
+//             cases
+//         }
+//     }
+// }
 
 export default Dashboard;
