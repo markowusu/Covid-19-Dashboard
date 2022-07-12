@@ -2,7 +2,7 @@
 import React from 'react';
 import DashLayout from '../components/DashLayout';
 import CardList from '../components/CardList';
-
+import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ChevronRightRounded, DangerousRounded, Person, Report } from '@mui/icons-material';
 import { ReportCard  } from '../components/ReportCard/ReportCard';
@@ -19,8 +19,9 @@ import { RightSection } from '../components/RightSection';
 import HeaderSection from '../components/HeaderSection';
 
 
-const Dashboard = (props)=>{
-    console.log(props.cases);
+const Dashboard = ()=>{
+   
+    
 return (
     
 <DashLayout>

@@ -20,22 +20,11 @@ import { managerData, nationalAverageData, yearLabels, managerQuarterData, natio
        this.handleClick.bind(this)
    }
 
-   componentDidMount(){
-    
-        var a ={"day":4}
-        const res =  fetch('http://127.0.0.1:8000/confirmed/daily',{
-        method : "POST",
-        async: true,
-        headers:{
-            'Content-Type':'application/json',
-        },
-        body: JSON.stringify(a)
-        })
-        
-        console.log(res)
-   }
-     handleClick =   (e)=>{
+
+     handleClick =async (e)=>{
          
+        const actualData = []
+        const actualLabel = []
         const {innerText } = e.target;
         const isAnuual = innerText == "YEAR"
         console.log(this.props,"I am from the card")
@@ -64,12 +53,30 @@ import { managerData, nationalAverageData, yearLabels, managerQuarterData, natio
         // });
         
         if (isAnuual){
-            const newData = isAnuual?managerData : managerQuarterData;
+            const newData = isAnuual? managerData : managerQuarterData;
+            const res = await fetch("http://localhost:8000/confirmed/daily",{
+                method: "POST",
+                headers: {"content-type": "application/json; chartset=utf-8"},
+               body:JSON.stringify({"day":4} ),
+            })
+
+            const responseData = await res.json()
+            console.log(responseData)
+            
+            responseData.map((value)=>{
+                actualData.push(value.cases)
+                console.log(actualData, "actual values")
+                actualLabel.push(value.dates)
+                console.log(actualLabel,"here")
+            })
+            
+            
             this.setState({
             activateYear: true,
             activateMonth: false,
             activateWeek: false,
             data: newData,
+            labels: actualLabel
             })
         }else if (innerText === "MONTH") {
             const newData = innerText === "MONTH" ? managerQuarterData: managerData;
@@ -77,7 +84,7 @@ import { managerData, nationalAverageData, yearLabels, managerQuarterData, natio
                 activateMonth: true,
                 activateWeek: false,
                 activateYear: false,
-                data: newData
+                data: actualData
         });
   
         }else{
@@ -89,8 +96,8 @@ import { managerData, nationalAverageData, yearLabels, managerQuarterData, natio
                 data: newData
             })
         }
-        const newData = isAnuual?managerData : managerQuarterData;
-        const newLabel = isAnuual? quarterLabels : yearLabels;
+        const newData = isAnuual? actualData : managerQuarterData;
+        const newLabel = isAnuual? actualLabel : yearLabels;
         const newAverage = isAnuual? nationalAverageQuarterData : nationalAverageData;
 
         this.setState({
