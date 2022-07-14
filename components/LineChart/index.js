@@ -69,6 +69,7 @@ Chart.defaults.global?.defaultFontColor = '#000';
                 ]
             },
             options: {
+                tension:0.6,
                 responsive: true,
               scales:{
                 

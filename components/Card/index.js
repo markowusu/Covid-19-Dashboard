@@ -32,7 +32,7 @@ import { managerData, nationalAverageData, yearLabels, managerQuarterData, natio
             const res = await fetch("http://localhost:8000/confirmed/daily",{
                 method: "POST",
                 headers: {"content-type": "application/json; chartset=utf-8"},
-               body:JSON.stringify({"day":4} ),
+               body:JSON.stringify({"day":10} ),
             })
 
             const responseData = await res.json()
