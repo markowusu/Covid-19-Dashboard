@@ -5,7 +5,7 @@ import {Menu} from '@headlessui/react';
   const LabelCard = (props)=>{
     
     const {text, onClick, activate, ListItems} = props;
-    console.log(ListItems,"otolege")
+    // console.log(ListItems,"otolege")
     return (
       <Menu as="div" className='relative flex flex-col mb-2'>
       <Menu.Button id="dropdownButton" data-dropdown-toggle="dropdown" aria-expanded="true" aria-haspopup="true" className= { classnames('text-black bg-white-700 hover:bg-white-800  font-medium rounded-lg text-sm px-4 py-1.5 text-center inline-flex items-center ',{"shadow-md":activate}) }  type="button"> {text} <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></Menu.Button>
