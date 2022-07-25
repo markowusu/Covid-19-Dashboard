@@ -57,7 +57,7 @@ Chart.defaults.global?.defaultFontColor = '#000';
                 labels: labels,
                 datasets: [
                     {
-                        label: "Sales",
+                        label: "Confirmed",
                         data:data,
                         tension: 0.4,
                         borderColor: '#48cae4',
@@ -70,14 +70,14 @@ Chart.defaults.global?.defaultFontColor = '#000';
                 ]
             },
             options: {
-                tension:0.6,
+                tension:0.4,
                 responsive: true,
               scales:{
                 
                   x:{
                     ticks:{
                         drawBorder: false,
-                        padding: 30
+                        padding: 0
                       
                     },
                     grid:{

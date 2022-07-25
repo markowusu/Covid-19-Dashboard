@@ -44,7 +44,7 @@ export const   RightSection =()=>{
             <div className='flex space-x-6 bg-[#ffff] border-2 items-center justify-center p-3 border-[#ffff] shadow-md rounded-md'>
             <div className="items-center max-w-sm  space-x-2 border-transparent bg-[#fffffff8] sm:py-4 sm:flex">
                {/* <Person className='w-10 h-10 font-medium bg-red-400 rounded-full fill-white shrink-0'/> */}
-               <div className = {classNames("flex flex-col justify-center w-10 h-10 align-middle  rounded-full item-center bg-red-500" )}>
+               <div className = {classNames("flex flex-col justify-center w-10 h-10 align-middle  rounded-full item-center bg-orange-500" )}>
                <FontAwesomeIcon icon={faUser} className='w-5 h-5 mx-auto text-white rounded-full sm:shrink-0'/>
                    
                </div>
@@ -56,7 +56,7 @@ export const   RightSection =()=>{
                </div> 
                
                <div className="items-center max-w-sm space-x-2 border-transparent bg-[#fffffff8] sm:py-4 sm:flex">
-               <div className = {classNames("flex flex-col justify-center w-10 h-10 align-middle  rounded-full item-center bg-orange-500" )}>
+               <div className = {classNames("flex flex-col justify-center w-10 h-10 align-middle  rounded-full item-center bg-[#9a031e]" )}>
                <FontAwesomeIcon icon={faShieldHalved} className='w-5 h-5 mx-auto text-white rounded-full sm:shrink-0'/>
                    
                </div>
@@ -80,7 +80,7 @@ export const   RightSection =()=>{
                </div>
                
                <div className="items-center max-w-sm space-x-2 bg-white border-transparent sm:py-4 sm:flex">
-               <div className = {classNames("flex flex-col justify-center w-10 h-10 align-middle  rounded-full item-center bg-blue-500" )}>
+               <div className = {classNames("flex flex-col justify-center w-10 h-10 align-middle  rounded-full item-center bg-[#d62828]" )}>
                <FontAwesomeIcon icon={faShieldHeart} className='w-5 h-5 mx-auto text-white rounded-full sm:shrink-0'/>
                    
                </div>

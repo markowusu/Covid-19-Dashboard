@@ -3,9 +3,104 @@ import  LineChart from '../LineChart';
 import LabelCard from '../LabelCard';
 import dateRange from '../../utils/dateTime';
 import {useState} from 'react';
-
+import history from '/confirmed.json'
+import {Year, Months, Week} from '../labelCarditems'
 import { managerData, nationalAverageData, yearLabels, managerQuarterData, nationalAverageQuarterData, quarterLabels } from '../../constants/mockData'
 
+ const dataSource = {
+    chart: {
+      caption: "Support Tickets : Received vs Resolved",
+      yaxisname: "# of Tickets",
+      subcaption: "Last week",
+      numdivlines: "3",
+      showvalues: "0",
+      legenditemfontsize: "15",
+      legenditemfontbold: "1",
+      plottooltext: "<b>$dataValue</b> Tickets $seriesName on $label",
+      theme: "fusion"
+    },
+    categories: [
+      {
+        category: [
+          {
+            label: "Jan 1"
+          },
+          {
+            label: "Jan 2"
+          },
+          {
+            label: "Jan 3"
+          },
+          {
+            label: "Jan 4"
+          },
+          {
+            label: "Jan 5"
+          },
+          {
+            label: "Jan 6"
+          },
+          {
+            label: "Jan 7"
+          }
+        ]
+      }
+    ],
+    dataset: [
+      {
+        seriesname: "Received",
+        data: [
+          {
+            value: "55"
+          },
+          {
+            value: "45"
+          },
+          {
+            value: "52"
+          },
+          {
+            value: "29"
+          },
+          {
+            value: "48"
+          },
+          {
+            value: "28"
+          },
+          {
+            value: "32"
+          }
+        ]
+      },
+      {
+        seriesname: "Resolved",
+        data: [
+          {
+            value: "50"
+          },
+          {
+            value: "30"
+          },
+          {
+            value: "49"
+          },
+          {
+            value: "22"
+          },
+          {
+            value: "43"
+          },
+          {
+            value: "14"
+          },
+          {
+            value: "31"
+          }
+        ]
+      }
+    ]
+  };
  class  Card  extends Component {
    constructor(){
        super();
@@ -24,36 +119,16 @@ import { managerData, nationalAverageData, yearLabels, managerQuarterData, natio
 
 
      handleClick =async (e)=>{
-       
+         let history_confirmed;
+         let history_date;
          let actualData;
          let actualLabel;
-        const {innerText } = e.target;
-        const isAnuual = innerText == "YEAR"
-        console.log(this.props,"I am from the card")
-       
-        // var a ={"day":4}
-        // const res =  fetch('http://127.0.0.1:8000/confirmed/daily',{
-        // method : "POST",
-        // async: true,
-        // headers:{
-        //     'Content-Type':'application/json',
-        // },
-        // body: JSON.stringify(a)
-        // })
-        
-        // console.log(res)
-      
-        // fetch("http://127.0.0.1:8000/confirmed/daily",
-        // {
-        //     method: "POST",
-        //     headers: { "Content-Type": "application/json" },
-        //     body:JSON.stringify({"days":4})
-        //   }
-        // ).then((response)=>{
-        //     const days = response.json()
-        //     console.log(response.json())
-        // });
-        
+         let finalConfirmed;
+         let finalDate;
+        const {value } = e.target.dataset;
+        console.log(value, "dual Text")
+        const isAnuual = value == 7            
+            
         if (isAnuual){
             const newData = isAnuual? managerData : managerQuarterData;
             const res = await fetch("http://localhost:8000/confirmed/daily",{
@@ -62,14 +137,17 @@ import { managerData, nationalAverageData, yearLabels, managerQuarterData, natio
                body:JSON.stringify({"day":365} ),
             })
 
-
-           
+           history_date = Object.values(history.Date)
+           history_confirmed = Object.values(history.Confirmed)
+           console.log(history_confirmed);
             const responseData = await res.json()
             console.log(responseData.forecast)
 
              actualLabel = Object.keys(responseData.forecast)
              actualData = Object.values(responseData.forecast)
             
+             finalConfirmed = [...history_confirmed,...actualData];
+             finalDate = [...history_date,...actualLabel]
             // responseData.map((value)=>{
             //     actualData.push(value.cases)
             //     console.log(actualData, "actual values")
@@ -88,8 +166,8 @@ import { managerData, nationalAverageData, yearLabels, managerQuarterData, natio
             data: newData,
             labels: actualLabel
             })
-        }else if (innerText === "MONTH") {
-            const newData = innerText === "MONTH" ? managerQuarterData: managerData;
+        }else if (value === 30) {
+            const newData = value === 30 ? managerQuarterData: managerData;
             this.setState({
                 activateMonth: true,
                 activateWeek: false,
@@ -98,7 +176,7 @@ import { managerData, nationalAverageData, yearLabels, managerQuarterData, natio
         });
   
         }else{
-            const newData=  innerText === "WEEK" ? nationalAverageQuarterData : nationalAverageData;
+            const newData=  value === 14 ? nationalAverageQuarterData : nationalAverageData;
             this.setState({
                 activateWeek: true,
                 activateYear: false,
@@ -106,8 +184,8 @@ import { managerData, nationalAverageData, yearLabels, managerQuarterData, natio
                 data: newData
             })
         }
-        const newData = isAnuual? actualData : managerQuarterData;
-        const newLabel = isAnuual? actualLabel : yearLabels;
+        const newData = isAnuual? finalConfirmed : managerQuarterData;
+        const newLabel = isAnuual? finalDate : yearLabels;
         const newAverage = isAnuual? nationalAverageQuarterData : nationalAverageData;
 
         this.setState({
@@ -146,14 +224,14 @@ import { managerData, nationalAverageData, yearLabels, managerQuarterData, natio
             </span>
             
             <div className='flex flex-row items-center justify-between mr-4 space-x-4'>
-              <LabelCard text="YEAR" onClick={this.handleClick} activate={this.state.activateYear}/>
-              <LabelCard text="MONTH"  onClick={this.handleClick} activate={this.state.activateMonth}/>
-              <LabelCard text="WEEK" onClick={this.handleClick} activate={this.state.activateWeek}/>
+              <LabelCard text="YEAR" onClick={this.handleClick} activate={this.state.activateYear} ListItems={Year}/>
+              <LabelCard text="MONTH"  onClick={this.handleClick} activate={this.state.activateMonth} ListItems={Months}/>
+              <LabelCard text="WEEK" onClick={this.handleClick} activate={this.state.activateWeek} ListItems={Week}/>
             </div>
         </div>
         
            
-           <LineChart data={this.state.data} labels={this.state.labels} average={this.state.average} />
+           <LineChart data={this.state.data} dataSource ={dataSource} labels={this.state.labels} average={this.state.average} />
      
        
         </div>

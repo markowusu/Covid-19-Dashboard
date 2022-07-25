@@ -1,39 +1,44 @@
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ChevronRightRounded } from '@mui/icons-material';
+import Image from 'next/image'
+import {useState} from 'react';
+import Link from 'next/link'
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import classNames from "classnames";
 
-export const  ReportCard = ({ iconName,reportCardTitle="No info yet",reportCardInfo="Lab loading...",reportTime="1 minute ago",iconBg="bg-yellow-100"}=props)=>{
+export const  ReportCard = ({mediaLink,reportCardTitle="No info yet",reportTime="1 minute ago",iconBg="bg-yellow-100", newsUrl}=props)=>{
+    
+    
     return (
-        <div className='p-4  border-2 border-white bg-[#fff] space-y-1 shadow-md'>
+        <div className='p-4  border-2 border-white max-w-md bg-[#fff] space-y-1 shadow-md'>
         <div className='flex items-start justify-between'>
         <div className='flex space-x-10 sm: sm:items-center'>
-        <div className = {classNames("flex flex-col justify-center w-10 h-10 align-middle  rounded-full item-center",iconBg )}>
-           {iconName}
+        <div className = {classNames("flex flex-col justify-center max-w-md max-h-md align-middle shrink object-fill rounded-full item-center",iconBg )}>
+           <Image src={mediaLink} alt="this is the news image link" width={100} height={100} className="max-w-xs rounded-full object-fit max-h-sm"   />
            </div>
             <div className='flex flex-col sm:flex'>
             
-            <p className=''>
+            <p className='text-ellipsis'>
             {reportCardTitle}
             </p>
 
-            <div className='text-sm font-semibold text-slate-400'>
+            {/* <div className='text-sm font-semibold text-slate-400'>
             {reportCardInfo}
-            </div>
+            </div> */}
             </div>
         </div>
-        <div className="leftIConCard"><FiberManualRecordIcon className='w-[5px] h-[5px]'/> <FiberManualRecordIcon className='w-[5px] h-[5px]'/></div>
+        {/* <div className="leftIConCard"><FiberManualRecordIcon className='w-[5px] h-[5px]'/> <FiberManualRecordIcon className='w-[5px] h-[5px]'/></div> */}
 
         
             </div>
             
             <div className='flex items-center justify-between '>
             <div className='font-sans text-sm font-medium text-slate-500'>
-                {reportTime}
+                { reportTime.toLocaleString('en-us', { day: 'numeric' })+ reportTime.toLocaleString('en-us', { month: 'short' }) + reportTime.toLocaleString('en-us', { year: 'numeric' })  }
             </div>
             <div className='font-sans text-sm font-semibold text-cyan-400'>
-                DETAILS <ChevronRightRounded/>
+                <a href={newsUrl}>DETAILS</a>
             </div>
                 
             </div>

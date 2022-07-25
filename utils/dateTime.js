@@ -8,3 +8,5 @@ export default function dateRange(){
     var lastday = new Date(curr.setDate(last));
     return {"firstday": first, "lastday":lastday}
 }
+
+// e0b89caa29e449b49d0d56fc7ccd3874 

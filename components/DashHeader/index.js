@@ -7,17 +7,14 @@ function DashHeader(){
        <div className="relative flex my-2 bg-white border-4 border-white rounded-md shadow-lg h-15 z-[-1] justify-center items-center">
            <nav className="flex flex-row items-center justify-between gap-6 p-4 space-x-60">
 <div className='flex flex-row items-center justify-evenly '>
-<div className='px-8 py-2 mx-4 bg-cyan-600'>
-    <span > Add Patient </span>
+<div className='px-8 py-2 mx-4 bg-cyan-600 hover:cursor-progress'>
+    <span className='text-[#f2f2f2] font-medium text-base '> Login  </span>
 </div>
 <div className='mx-4' >
     <span> Treatments </span>
 </div>
 <div className='mx-4'>
-    <span> Doctors </span>
-</div>
-<div className='mx-4'>
-    <span> Help </span>
+    <span > About </span>
 </div>
 
    

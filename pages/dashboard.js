@@ -2,6 +2,7 @@
 import React from 'react';
 import DashLayout from '../components/DashLayout';
 import CardList from '../components/CardList';
+import axios from "axios";
 import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ChevronRightRounded, DangerousRounded, Person, Report } from '@mui/icons-material';
@@ -19,8 +20,25 @@ import { RightSection } from '../components/RightSection';
 import HeaderSection from '../components/HeaderSection';
 
 
+
 const Dashboard = ()=>{
+   const [reportList , setReportList] = useState();
    
+   let options = {
+    method: 'GET',
+    url: 'https://api.newscatcherapi.com/v2/search',
+    params: {q: 'covid US', lang: 'en', sort_by: 'relevancy', page: '1', page_size: '2'},
+    headers: {
+      'x-api-key': 'FE9Jyelhh47mE1dgK7NMIPkWb_DY8fA2Fg_p9ruZaWI'
+    }
+  };
+   useEffect(()=>{
+    axios.request(options).then((response) =>{
+        const {articles} = response.data 
+        setReportList(articles)
+        console.log(reportList, "This is Thanos krrrh");
+    });
+   },[])
     
 return (
     
@@ -31,7 +49,7 @@ return (
     <RightSection/>
     <div className='relative flex-auto'>
         <HeaderSection>
-           <p className='headerText'>REPORTS</p>
+           <p className='headerText'>NEWS</p>
             <span className='p-1 leftIConCard'>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" className="w-4 h-4 m-0 font-medium bg-white ">
             <path fillRule="evenodd" clipRule="evenodd" d="M21 6h-7.79a4.001 4.001 0 00-7.42 0H3v3h2.79a4.001 4.001 0 007.42 0H21V6zm-10.21 9H3v3h7.79a4.001 4.001 0 007.42 0H21v-3h-2.79a4.001 4.001 0 00-7.42 0z" fill="gray">
@@ -43,9 +61,9 @@ return (
         
         <div className="flex flex-col space-y-3">
                 {  
-                ReportList.map((value, id)=>{
+                reportList?.map((value, id)=>{
                     return(
-                        <ReportCard key={id}  reportCardTitle={value.reportTitle} iconBg={value.iconBg} reportTime={value.reportTime} reportCardInfo={value.reportInfo} iconName={value.reportIcon} />   
+                        <ReportCard key={id}  reportCardTitle={value.title} reportTime={value.published_date}  mediaLink={value.media}  newsUrl = {value.link}/>   
                     );
                         
                 })   
