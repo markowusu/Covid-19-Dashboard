@@ -13,7 +13,7 @@ import { managerData, nationalAverageData, yearLabels, managerQuarterData, natio
        this.state={
            data: managerData,
            labels: "",
-           average: "",
+           predictedData: "",
            date: dateRange(),
            activateYear : false,
             activateMonth: false,
@@ -31,16 +31,16 @@ import { managerData, nationalAverageData, yearLabels, managerQuarterData, natio
          let actualLabel;
          let finalConfirmed;
          let finalDate;
+        
         const {value } = e.target.dataset;
-        console.log(value, "dual Text")
-        const isAnuual = value == 7            
-            
-        if (isAnuual){
-            const newData = isAnuual? managerData : managerQuarterData;
+       
+                   
+           
+        if ( value){
             const res = await fetch("http://localhost:8000/confirmed/daily",{
                 method: "POST",
                 headers: {"content-type": "application/json; chartset=utf-8"},
-               body:JSON.stringify({"day":365} ),
+               body:JSON.stringify({"day":value} ),
             })
 
            history_date = Object.values(history.Date)
@@ -54,52 +54,52 @@ import { managerData, nationalAverageData, yearLabels, managerQuarterData, natio
             
              finalConfirmed = [...history_confirmed,...actualData];
              finalDate = [...history_date,...actualLabel]
-            // responseData.map((value)=>{
-            //     actualData.push(value.cases)
-            //     console.log(actualData, "actual values")
-            //     actualLabel.push(value.dates)
-            //     console.log(actualLabel,"here")
-            // })
-
            
-
+            this.setState({
+                data: history_confirmed,
+                labels: finalDate,  
+                predictedData : finalConfirmed ,
+                
+            })
           
             
             this.setState({
             activateYear: true,
             activateMonth: false,
             activateWeek: false,
-            data: newData,
-            labels: actualLabel
-            })
-        }else if (value === 30) {
-            const newData = value === 30 ? managerQuarterData: managerData;
-            this.setState({
-                activateMonth: true,
-                activateWeek: false,
-                activateYear: false,
-                data: actualData
-        });
-  
-        }else{
-            const newData=  value === 14 ? nationalAverageQuarterData : nationalAverageData;
-            this.setState({
-                activateWeek: true,
-                activateYear: false,
-                activateMonth: false,
-                data: newData
+            // data: newData,
+            // labels: actualLabel
             })
         }
-        const newData = isAnuual? finalConfirmed : managerQuarterData;
-        const newLabel = isAnuual? finalDate : yearLabels;
-        const newAverage = isAnuual? nationalAverageQuarterData : nationalAverageData;
+        
+        // else if (value === 30) {
+        //     const newData = value === 30 ? managerQuarterData: managerData;
+        //     this.setState({
+        //         activateMonth: true,
+        //         activateWeek: false,
+        //         activateYear: false,
+        //         data: actualData
+        // });
+  
+        // }else{
+        //     const newData=  value === 14 ? nationalAverageQuarterData : nationalAverageData;
+        //     this.setState({
+        //         activateWeek: true,
+        //         activateYear: false,
+        //         activateMonth: false,
+        //         data: newData
+        //     })
+        // }
+        // const newData = isAnuual? finalConfirmed : managerQuarterData;
+        // const newLabel = isAnuual? finalDate : yearLabels;
+        // const newAverage = isAnuual? nationalAverageQuarterData : nationalAverageData;
 
-        this.setState({
-            data: newData,
-            labels: newLabel,
-            average: newAverage,
+        // this.setState({
+        //     data: newData,
+        //     labels: newLabel,
+        //     average: newAverage,
             
-        })
+        // })
     }
     
     render(){
@@ -137,7 +137,7 @@ import { managerData, nationalAverageData, yearLabels, managerQuarterData, natio
         </div>
         
            
-           <LineChart data={this.state.data}  labels={this.state.labels} average={this.state.average} />
+           <LineChart data={this.state.data} predictedData = {this.state.predictedData} labels={this.state.labels} average={this.state.average} />
      
        
         </div>
