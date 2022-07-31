@@ -137,7 +137,7 @@ import { managerData, nationalAverageData, yearLabels, managerQuarterData, natio
         </div>
         
            
-           <LineChart data={this.state.data} dataSource ={dataSource} labels={this.state.labels} average={this.state.average} />
+           <LineChart data={this.state.data}  labels={this.state.labels} average={this.state.average} />
      
        
         </div>
