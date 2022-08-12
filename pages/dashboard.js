@@ -96,7 +96,7 @@ return (
                 </p>
                 </div>
                 <div className='w-[180px] ml-12'>
-                    <Line options={options} data={data1} />
+                    <Line options={options1} data={data1} />
                 </div>
             </div>
             </div>

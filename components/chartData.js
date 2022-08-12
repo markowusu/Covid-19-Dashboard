@@ -52,46 +52,45 @@ const data1 = {
 }
 
 const options1 = {
-    scales:{
-     
-        
-        x:{ 
-            ticks: {
-                //option 2, use callback to change labels to empty string
-                callback: () => ('')
-              },
-              grid: {
-                display: false,
-                zeroLineColor:'white',
-                  color:'transparent',
-                  drawBorder: false 
+  scales:{
+       
+    x:{ 
+        ticks: {
+            //option 2, use callback to change labels to empty string
+            callback: () => ('')
+          },
+          grid: {
+            display: false,
+            zeroLineColor:'white',
+              color:'transparent',
+              drawBorder: false 
 
-              }
-        },
-        y:{
-            ticks: {
-                //option 2, use callback to change labels to empty string
-                callback: () => ('')
-              },
-              grid: {
-                display: false,
-                zeroLineColor:'white',
-                  color:'transparent',
-                  drawBorder: false 
-              }
-            }
-      
+          }
     },
-    responsive: true,
-    plugins: {
-        legend: {
-          display: false,
+    y:{
+        ticks: {
+            //option 2, use callback to change labels to empty string
+            callback: () => ('')
+          },
+          grid: {
+            display: false,
+            zeroLineColor:'white',
+              color:'transparent',
+              drawBorder: false 
+          }
         }
-    },
-    title:{
-        display: false,
-        title:"Area chart"
+  
+},
+responsive: true,
+plugins: {
+    legend: {
+      display: false,
     }
+},
+title:{
+    display: false,
+    title:"Area chart"
+}
 };
 
 const options = {

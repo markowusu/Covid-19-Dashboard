@@ -94,7 +94,7 @@ export const   RightSection =()=>{
                </div>
                
                <HeaderSection>
-            <div className='mt-4 align-middle headerText'> PATIENT STATISTICS  </div>
+            <div className='mt-4 align-middle headerText'> COVID STATISTICS  </div>
                 <span className='leftIConCard'><MoreHorizRounded/></span>
             </HeaderSection>
             <Card  />
