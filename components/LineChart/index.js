@@ -17,7 +17,7 @@ class LineChart extends Component {
 
     bindChart=()=>{
         const myLineRef = this.myChartRef.current.getContext("2d");
-        const {labels, data,average } = this.props;
+        const {labels, data,predictedData } = this.props;
       
  
 
@@ -50,22 +50,47 @@ Chart.controllers?.LineWithLine = Chart.controllers?.line.extend({
 Chart.defaults.global?.defaultFontFamily = 'Arial';
 Chart.defaults.global?.defaultFontSize = 16;
 Chart.defaults.global?.defaultFontColor = '#000';
+
         myLineChart = new Chart(myLineRef, {
             type: "line",
             data: {
                 //Bring in data
                 labels: labels,
                 datasets: [
+                   
                     {
                         label: "Confirmed",
                         data:data,
                         tension: 0.4,
-                        borderColor: '#48cae4',
-                        backgroundColor: transparentize("#caf0f8") ,
+                        // borderColor: '#48cae4',
+                        backgroundColor: transparentize("#ffffff") ,
                         pointRadius: 0,
-                        borderWidth:2,
+                        borderWidth:3.5,
                         fill:true,
+                        segment:{
+                            borderColor: function(context) {
+                             return  context.p0.parsed.y < context.p1.parsed.y ? "#bf0603" : "red";
+                            // var value = context.datasetIndex[index];
+                            // return value < 50000000 ? 'blue' :  'yellow';
+                        }
+                            
+                        }
+                        
+                        
+                        
                     },
+                    {
+                        label: "Confirmed",
+                        data:predictedData,
+                        tension: 0.4,
+                        borderColor: '#ff0054',
+                        borderDash: [7,5],
+                        backgroundColor: transparentize("#e9ecef") ,
+                        pointRadius: 0,
+                        borderWidth:3.5,
+                        fill:true,  
+                    },
+                    
                     
                 ]
             },
@@ -130,8 +155,8 @@ Chart.defaults.global?.defaultFontColor = '#000';
        
 render(){
     return(
-        <div className='relative inline-block w-full h-40 bg-white rounded shadow-md '>
-            <canvas ref={this.myChartRef} height="150px" className="bg-white "/>
+        <div className='relative inline-block w-full bg-white rounded shadow-md h-44 '>
+            <canvas ref={this.myChartRef} height="130px" className="bg-white "/>
         </div>
     );
 }
