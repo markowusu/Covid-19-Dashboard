@@ -18,12 +18,12 @@ const  iconsList = [
    {
      iconName:"Message",
      icon:<MailRoundedIcon className="text-[#034363]"/>,
-     link:"/messages"
+     link:"/news"
  },
 {
      iconName:"Sentiment",
      icon:<InsertChartRoundedIcon className="text-[#034363]"/>,
-     link:"sentiment",
+     link:"/treatment",
  },
 {
      iconName:"Analytics",

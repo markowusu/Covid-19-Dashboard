@@ -19,15 +19,15 @@ class  Sidebar extends Component{
   
   handleClick = (e)=>{
     // const {innerText} = e.target;
-    console.log(e,"active sidebar")
+    // console.log(e,"active sidebar")
     // setActiveState({innerText});
   };
 
   
 render(){
   return(  
-  <div className={'  group border-white border-2 flex flex-col w-20   outline-none  z-10  bg-white shadow-md' }>
-        <aside className={"p-2 pr-0 flex flex-row align-middle pt-10 "} >
+  <div className={'fixed h-full  group border-white border-2 flex flex-col outline-none  z-10  bg-white shadow-md' }>
+        <aside className={"p-2 pr-0 flex flex-row align-middle pt-10 mr-10"} >
         
 <div className="flex flex-col justify-between align-middle ">
 <div className="flex flex-col">
