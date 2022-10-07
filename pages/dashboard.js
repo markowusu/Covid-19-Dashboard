@@ -18,25 +18,26 @@ import {Line} from 'react-chartjs-2';
 import {data,options,options1,data1} from "../components/chartData";
 import { RightSection } from '../components/RightSection';
 import HeaderSection from '../components/HeaderSection';
-
-
+import { ShimmerSectionHeader } from 'react-shimmer-effects';
 
 const Dashboard = ()=>{
    const [reportList , setReportList] = useState();
+   const [isLoading , setLoading ] = useState(true)
    
    let options = {
     method: 'GET',
     url: 'https://api.newscatcherapi.com/v2/search',
     params: {q: 'covid US', lang: 'en', sort_by: 'relevancy', page: '1', page_size: '2'},
     headers: {
-      'x-api-key': 'FE9Jyelhh47mE1dgK7NMIPkWb_DY8fA2Fg_p9ruZaWI'
+      'x-api-key': 'wzQDdr7knTC3AJiCqR111PkolHuYBEbW_Dh0qUu-iK8'
     }
   };
    useEffect(()=>{
     axios.request(options).then((response) =>{
         const {articles} = response.data 
         setReportList(articles)
-        console.log(reportList, "This is Thanos krrrh");
+        setLoading(false)
+        
     });
    },[])
     
@@ -60,21 +61,31 @@ return (
         </HeaderSection>
         
         <div className="flex flex-col space-y-3">
+         
+        { 
+            isLoading ? <>
+        <ShimmerSectionHeader /> 
+        <br/>
+        <ShimmerSectionHeader />
+        </> : 
+        <div className="flex flex-col space-y-3">
                 {  
                 reportList?.map((value, id)=>{
                     return(
-                        <ReportCard key={id}  reportCardTitle={value.title} reportTime={value.published_date}  mediaLink={value.media}  newsUrl = {value.link}/>   
+                        <ReportCard key={id}  reportCardTitle={value.title} reportTime={value.published_date}  mediaLink={value.media} maxWidth= {false}  newsUrl = {value.link}/>   
                     );
                         
                 })   
                 
                  }
             
+        </div> }
         </div>
+       
 
         <HeaderSection>
             <p className="mt-4 headerText">
-                COVID CASES
+                COVID-19 TREND CHART
             </p>
             <div className="leftIConCard"><FiberManualRecordIcon className='w-[5px] h-[5px]'/> <FiberManualRecordIcon className='w-[5px] h-[5px]'/></div>  
         </HeaderSection>
@@ -89,11 +100,9 @@ return (
             </div>
             <div className="flex flex-col items-start justify-start ">
                 <p className='font-sans text-sm font-semibold text-slate-500'>
-                    Downward
+                    Downward 
                 </p>
-                <p className='font-sans text-base font-semibold text-slate-500'>
-                    1,200
-                </p>
+                
                 </div>
                 <div className='w-[180px] ml-12'>
                     <Line options={options1} data={data1} />
@@ -108,11 +117,9 @@ return (
             </div>
             <div className="flex flex-col items-start justify-start ">
                 <p className='font-sans text-sm font-semibold text-slate-500'>
-                    Upward
+                    Upward 
                 </p>
-                <p className='font-sans text-base font-semibold text-slate-500'>
-                    2,300
-                </p>
+                
                 </div>
                 <div className='w-[180px] ml-12'>
                     <Line options={options1} data={data} />
